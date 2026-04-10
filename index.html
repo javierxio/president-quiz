@@ -1,828 +1,409 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
-	<meta name="created" content="2026-04-09T22:00:24.959671018"/>
-	<meta name="changed" content="2026-04-09T22:00:43.111925911"/>
-	<style type="text/css">
-		@page { size: 8.5in 11in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which President Are You? (Last 50 Years)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+        
+        :root {
+            --primary: #1e3a8a;
+            --accent: #3b82f6;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+            margin: 0;
+            padding: 0;
+            color: #1e2937;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin: 0;
+            font-size: 2.2rem;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-top: 8px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+        .progress {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1e2937;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            padding: 16px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.05rem;
+        }
+        .option:hover {
+            border-color: var(--accent);
+            background: #f0f9ff;
+        }
+        .option.selected {
+            border-color: var(--primary);
+            background: #eff6ff;
+            font-weight: 500;
+        }
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+        .result {
+            text-align: center;
+        }
+        .president-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+        .score {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+        .share {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 9999px;
+            background: #f1f5f9;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .restart {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-top: 15px;
+        }
+        .restart:hover {
+            background: #eff6ff;
+        }
+        @media (max-width: 640px) {
+            h1 { font-size: 1.9rem; }
+            .card { padding: 22px; }
+        }
+    </style>
 </head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p style="line-height: 100%; margin-bottom: 0in">
-&lt;!DOCTYPE html&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">&lt;html lang=&quot;en&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">&lt;head&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;meta
-charset=&quot;UTF-8&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;meta
-name=&quot;viewport&quot; content=&quot;width=device-width,
-initial-scale=1.0&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;title&gt;Which
-President Are You? (Last 50 Years)&lt;/title&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;style&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        @import
-url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');</p>
-<p style="line-height: 100%; margin-bottom: 0in">        
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        :root {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
---primary: #1e3a8a;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
---accent: #3b82f6;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        body {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-family: 'Inter', system-ui, sans-serif;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: linear-gradient(135deg, #f8fafc, #e0f2fe);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            margin:
-0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-#1e2937;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-line-height: 1.6;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .container {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-max-width: 700px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            margin:
-0 auto;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-20px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        header {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-text-align: center;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-30px 0 20px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        h1 {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-family: 'Playfair Display', serif;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-var(--primary);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            margin:
-0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-size: 2.2rem;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .subtitle {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-#64748b;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-top: 8px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .card {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: white;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-radius: 16px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-box-shadow: 0 10px 30px rgba(0,0,0,0.08);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-30px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-bottom: 25px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .progress {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            height:
-8px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #e2e8f0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-radius: 9999px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-overflow: hidden;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-bottom: 25px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-.progress-bar {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            height:
-100%;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: linear-gradient(to right, var(--primary), var(--accent));</p>
-<p style="line-height: 100%; margin-bottom: 0in">            width:
-0%;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-transition: width 0.4s ease;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .question {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-size: 1.25rem;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-weight: 600;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-bottom: 20px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-#1e2937;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .options {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            display:
-flex;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-flex-direction: column;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            gap:
-12px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .option {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-16px 20px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            border:
-2px solid #e2e8f0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-radius: 12px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            cursor:
-pointer;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-transition: all 0.2s;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-size: 1.05rem;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-.option:hover {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-color: var(--accent);</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #f0f9ff;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-.option.selected {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-color: var(--primary);</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #eff6ff;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-weight: 500;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        button {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: var(--primary);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-white;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            border:
-none;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-14px 32px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-size: 1.1rem;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-radius: 12px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            cursor:
-pointer;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            width:
-100%;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-top: 20px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-weight: 600;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        button:hover
-{</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #1e40af;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-button:disabled {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #94a3b8;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            cursor:
-not-allowed;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .result {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-text-align: center;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-.president-name {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-size: 2rem;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-weight: 700;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-var(--primary);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            margin:
-15px 0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .score {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-size: 1.1rem;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-#64748b;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .share {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-top: 30px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            display:
-flex;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            gap:
-12px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-justify-content: center;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-flex-wrap: wrap;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .share-btn {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            padding:
-10px 20px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-border-radius: 9999px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #f1f5f9;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            border:
-none;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            cursor:
-pointer;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-font-weight: 500;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        .restart {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: transparent;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            color:
-var(--primary);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            border:
-2px solid var(--primary);</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-margin-top: 15px;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-.restart:hover {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-background: #eff6ff;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        @media
-(max-width: 640px) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            h1 {
-font-size: 1.9rem; }</p>
-<p style="line-height: 100%; margin-bottom: 0in">            .card {
-padding: 22px; }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;/style&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">&lt;/head&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">&lt;body&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;div
-class=&quot;container&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;header&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-&lt;h1&gt;Which President Are You?&lt;/h1&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;p
-class=&quot;subtitle&quot;&gt;Last 50 Years Edition • Fun
-Personality Quiz&lt;/p&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;/header&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+<body>
+    <div class="container">
+        <header>
+            <h1>Which President Are You?</h1>
+            <p class="subtitle">Last 50 Years Edition • Fun Personality Quiz</p>
+        </header>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;!-- Quiz
-Screen --&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;div
-id=&quot;quiz-screen&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;div
-class=&quot;card&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;div
-class=&quot;progress&quot;&gt;&lt;div id=&quot;progress-bar&quot;
-class=&quot;progress-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;div
-id=&quot;question-number&quot; style=&quot;text-align:right;
-color:#64748b; margin-bottom:8px;&quot;&gt;Question 1 of 10&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;div
-id=&quot;question-text&quot; class=&quot;question&quot;&gt;&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;div
-id=&quot;options&quot; class=&quot;options&quot;&gt;&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-&lt;button id=&quot;next-btn&quot; disabled&gt;Next Question&lt;/button&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        <!-- Quiz Screen -->
+        <div id="quiz-screen">
+            <div class="card">
+                <div class="progress"><div id="progress-bar" class="progress-bar"></div></div>
+                <div id="question-number" style="text-align:right; color:#64748b; margin-bottom:8px;">Question 1 of 10</div>
+                
+                <div id="question-text" class="question"></div>
+                
+                <div id="options" class="options"></div>
+                
+                <button id="next-btn" disabled>Next Question</button>
+            </div>
+        </div>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;!--
-Result Screen --&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;div
-id=&quot;result-screen&quot; class=&quot;card result&quot;
-style=&quot;display:none;&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;h2
-style=&quot;margin-top:0;&quot;&gt;Your Presidential Match&lt;/h2&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;div
-id=&quot;result-content&quot;&gt;&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;div
-class=&quot;share&quot;&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-&lt;button class=&quot;share-btn&quot;
-onclick=&quot;shareResult('twitter')&quot;&gt;Share on X&lt;/button&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-&lt;button class=&quot;share-btn&quot;
-onclick=&quot;shareResult('facebook')&quot;&gt;Share on
-Facebook&lt;/button&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-&lt;button class=&quot;share-btn&quot; onclick=&quot;copyLink()&quot;&gt;Copy
-Link&lt;/button&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            &lt;button
-class=&quot;restart&quot; onclick=&quot;restartQuiz()&quot;&gt;Take
-Quiz Again&lt;/button&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        &lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        <!-- Result Screen -->
+        <div id="result-screen" class="card result" style="display:none;">
+            <h2 style="margin-top:0;">Your Presidential Match</h2>
+            <div id="result-content"></div>
+            
+            <div class="share">
+                <button class="share-btn" onclick="shareResult('twitter')">Share on X</button>
+                <button class="share-btn" onclick="shareResult('facebook')">Share on Facebook</button>
+                <button class="share-btn" onclick="copyLink()">Copy Link</button>
+            </div>
+            
+            <button class="restart" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;script&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        const
-presidents = {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            A: {
-name: &quot;Jimmy Carter&quot;, desc: &quot;Humble, detail-oriented
-moral compass with a focus on efficiency, energy independence, and
-human rights.&quot;, color: &quot;#1e3a8a&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            B: {
-name: &quot;Ronald Reagan&quot;, desc: &quot;Optimistic communicator
-who restored national pride with tax cuts, deregulation, and 'peace
-through strength'.&quot;, color: &quot;#b91c1c&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            C: {
-name: &quot;George H.W. Bush&quot;, desc: &quot;Steady, experienced
-team player who builds coalitions and values pragmatic leadership.&quot;,
-color: &quot;#334155&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            D: {
-name: &quot;Bill Clinton&quot;, desc: &quot;Charismatic
-bridge-builder who connects personally and masters political
-triangulation.&quot;, color: &quot;#15803d&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            E: {
-name: &quot;George W. Bush&quot;, desc: &quot;Decisive, folksy leader
-with clear moral lines and strong national security focus.&quot;,
-color: &quot;#1e40af&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            F: {
-name: &quot;Barack Obama&quot;, desc: &quot;Hopeful unifier and
-eloquent inspirer focused on smart diplomacy and healthcare.&quot;,
-color: &quot;#1e3a8a&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            G: {
-name: &quot;Donald Trump&quot;, desc: &quot;Bold outsider who shakes
-up the system, puts America First, and cuts through bureaucracy.&quot;,
-color: &quot;#b91c1c&quot; },</p>
-<p style="line-height: 100%; margin-bottom: 0in">            H: {
-name: &quot;Joe Biden&quot;, desc: &quot;Experienced, empathetic
-consensus-seeker with decades of public service.&quot;, color:
-&quot;#334155&quot; }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        };</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <script>
+        const presidents = {
+            A: { name: "Jimmy Carter", desc: "Humble, detail-oriented moral compass with a focus on efficiency, energy independence, and human rights.", color: "#1e3a8a" },
+            B: { name: "Ronald Reagan", desc: "Optimistic communicator who restored national pride with tax cuts, deregulation, and 'peace through strength'.", color: "#b91c1c" },
+            C: { name: "George H.W. Bush", desc: "Steady, experienced team player who builds coalitions and values pragmatic leadership.", color: "#334155" },
+            D: { name: "Bill Clinton", desc: "Charismatic bridge-builder who connects personally and masters political triangulation.", color: "#15803d" },
+            E: { name: "George W. Bush", desc: "Decisive, folksy leader with clear moral lines and strong national security focus.", color: "#1e40af" },
+            F: { name: "Barack Obama", desc: "Hopeful unifier and eloquent inspirer focused on smart diplomacy and healthcare.", color: "#1e3a8a" },
+            G: { name: "Donald Trump", desc: "Bold outsider who shakes up the system, puts America First, and cuts through bureaucracy.", color: "#b91c1c" },
+            H: { name: "Joe Biden", desc: "Experienced, empathetic consensus-seeker with decades of public service.", color: "#334155" }
+        };
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        const
-questions = [</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Your leadership vibe in one sentence&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Biggest economic priority&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Foreign-policy instinct&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;How you communicate&quot;, a: [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Crisis response style&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Your relationship with the media&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;View on government size&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Personal background you relate to most&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;How you handle criticism&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-},</p>
-<p style="line-height: 100%; margin-bottom: 0in">            { q:
-&quot;Legacy you’d most like to leave&quot;, a:
-[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]
-}</p>
-<p style="line-height: 100%; margin-bottom: 0in">        ];</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        const questions = [
+            { q: "Your leadership vibe in one sentence", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "Biggest economic priority", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "Foreign-policy instinct", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "How you communicate", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "Crisis response style", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "Your relationship with the media", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "View on government size", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "Personal background you relate to most", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "How you handle criticism", a: ["A","B","C","D","E","F","G","H"] },
+            { q: "Legacy you’d most like to leave", a: ["A","B","C","D","E","F","G","H"] }
+        ];
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        const
-optionsText = [</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-[&quot;Humble, detail-oriented, moral compass first&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Optimistic “morning in America” communicator who rallies
-the nation&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Steady, experienced team-player who builds coalitions&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Charismatic bridge-builder who feels everyone’s pain&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Decisive, folksy, “with us or against us” clarity&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Hopeful unifier and eloquent inspirer&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Bold
-outsider who shakes things up and cuts through red tape&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Experienced, empathetic consensus-seeker who’s been around
-forever&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">            [&quot;Energy
-independence and government efficiency&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Tax
-cuts + deregulation to unleash growth&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Pragmatic fiscal responsibility&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Balanced budgets + targeted social programs&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Tax
-cuts + compassionate conservatism&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Stimulus spending + expanding healthcare access&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;America-first trade deals and tariffs&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Massive infrastructure bills + middle-class relief&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">            [&quot;Human
-rights and diplomacy over military force&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Peace
-through strength and clear ideological lines&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Multilateral alliances and careful coalition-building&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Selective interventions to stop atrocities&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Pre-emptive action against threats&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Smart
-diplomacy, drawdowns, and multilateral deals&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;“America First” – no endless wars, pressure allies&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Strong
-alliances and steady support for partners&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-[&quot;Soft-spoken, earnest, maybe a little wonky&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Master
-storyteller with memorable one-liners&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Careful, understated, “thousand points of light” style&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Empathetic storyteller who connects on a personal level&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Straight-talking, plain-spoken Texan energy&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Inspirational speeches that feel like poetry&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Direct, rally-style, loves social media and nicknames&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Folksy, off-the-cuff, “c’mon man” vibe&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-[&quot;Patient negotiation and moral suasion&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Decisive action + inspirational speeches&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Deliberate, experienced, avoid rash moves&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Quick
-political triangulation&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Rally
-the public around a clear mission&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Cool,
-measured, data-driven&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Bold,
-disruptive moves and maximum pressure&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Steady
-hand, consult experts, build coalitions&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">            [&quot;Honest
-but sometimes seen as weak&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Use
-the “bully pulpit” like a pro&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Traditional, respectful press conferences&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Master
-of spin and late-night charisma&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;“Mission accomplished” photo-ops&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Cool,
-composed, digital-era communicator&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Love-hate Twitter/X wars, call them “fake news”&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Traditional press but occasional gaffes&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-[&quot;Compassionate but lean government&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Get
-government off people’s backs&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Competent, limited government&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;“The
-era of big government is over” (but still active)&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Small
-government except for defense + security&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Smart,
-activist government for big problems&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Drain
-the swamp, slash bureaucracy&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Government can be a force for good when used right&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">            [&quot;Peanut
-farmer / engineer / Sunday-school teacher&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Actor
-/ optimist who became a movement leader&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;WWII
-veteran / CIA director / diplomat&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Rhodes
-scholar / saxophone player / Southern governor&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Businessman / baseball owner / governor&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Community organizer / constitutional law professor&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Real-estate developer / reality-TV star / outsider&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Long-time senator / lifelong public servant&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">            [&quot;Stay
-true to your principles, even if unpopular&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Stay
-positive and keep the vision front-and-center&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Quiet
-dignity and focus on the job&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Feel
-the pain and pivot&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Stay
-the course with resolve&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Rise
-above it with grace and hope&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Hit
-back harder and call it out&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Shrug
-it off with folksy humor&quot;],</p>
-<p style="line-height: 100%; margin-bottom: 0in">            [&quot;Human
-rights champion and peacemaker&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Restored American pride and economic boom&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Steady
-hand through turbulent times&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Longest economic expansion in history&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Defended freedom and spread democracy&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;First
-Black president, landmark healthcare reform&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">             &quot;Put
-America First and reshaped global trade&quot;,</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-&quot;Infrastructure overhaul + steady governance&quot;]</p>
-<p style="line-height: 100%; margin-bottom: 0in">        ];</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        const optionsText = [
+            ["Humble, detail-oriented, moral compass first",
+             "Optimistic “morning in America” communicator who rallies the nation",
+             "Steady, experienced team-player who builds coalitions",
+             "Charismatic bridge-builder who feels everyone’s pain",
+             "Decisive, folksy, “with us or against us” clarity",
+             "Hopeful unifier and eloquent inspirer",
+             "Bold outsider who shakes things up and cuts through red tape",
+             "Experienced, empathetic consensus-seeker who’s been around forever"],
+            ["Energy independence and government efficiency",
+             "Tax cuts + deregulation to unleash growth",
+             "Pragmatic fiscal responsibility",
+             "Balanced budgets + targeted social programs",
+             "Tax cuts + compassionate conservatism",
+             "Stimulus spending + expanding healthcare access",
+             "America-first trade deals and tariffs",
+             "Massive infrastructure bills + middle-class relief"],
+            ["Human rights and diplomacy over military force",
+             "Peace through strength and clear ideological lines",
+             "Multilateral alliances and careful coalition-building",
+             "Selective interventions to stop atrocities",
+             "Pre-emptive action against threats",
+             "Smart diplomacy, drawdowns, and multilateral deals",
+             "“America First” – no endless wars, pressure allies",
+             "Strong alliances and steady support for partners"],
+            ["Soft-spoken, earnest, maybe a little wonky",
+             "Master storyteller with memorable one-liners",
+             "Careful, understated, “thousand points of light” style",
+             "Empathetic storyteller who connects on a personal level",
+             "Straight-talking, plain-spoken Texan energy",
+             "Inspirational speeches that feel like poetry",
+             "Direct, rally-style, loves social media and nicknames",
+             "Folksy, off-the-cuff, “c’mon man” vibe"],
+            ["Patient negotiation and moral suasion",
+             "Decisive action + inspirational speeches",
+             "Deliberate, experienced, avoid rash moves",
+             "Quick political triangulation",
+             "Rally the public around a clear mission",
+             "Cool, measured, data-driven",
+             "Bold, disruptive moves and maximum pressure",
+             "Steady hand, consult experts, build coalitions"],
+            ["Honest but sometimes seen as weak",
+             "Use the “bully pulpit” like a pro",
+             "Traditional, respectful press conferences",
+             "Master of spin and late-night charisma",
+             "“Mission accomplished” photo-ops",
+             "Cool, composed, digital-era communicator",
+             "Love-hate Twitter/X wars, call them “fake news”",
+             "Traditional press but occasional gaffes"],
+            ["Compassionate but lean government",
+             "Get government off people’s backs",
+             "Competent, limited government",
+             "“The era of big government is over” (but still active)",
+             "Small government except for defense + security",
+             "Smart, activist government for big problems",
+             "Drain the swamp, slash bureaucracy",
+             "Government can be a force for good when used right"],
+            ["Peanut farmer / engineer / Sunday-school teacher",
+             "Actor / optimist who became a movement leader",
+             "WWII veteran / CIA director / diplomat",
+             "Rhodes scholar / saxophone player / Southern governor",
+             "Businessman / baseball owner / governor",
+             "Community organizer / constitutional law professor",
+             "Real-estate developer / reality-TV star / outsider",
+             "Long-time senator / lifelong public servant"],
+            ["Stay true to your principles, even if unpopular",
+             "Stay positive and keep the vision front-and-center",
+             "Quiet dignity and focus on the job",
+             "Feel the pain and pivot",
+             "Stay the course with resolve",
+             "Rise above it with grace and hope",
+             "Hit back harder and call it out",
+             "Shrug it off with folksy humor"],
+            ["Human rights champion and peacemaker",
+             "Restored American pride and economic boom",
+             "Steady hand through turbulent times",
+             "Longest economic expansion in history",
+             "Defended freedom and spread democracy",
+             "First Black president, landmark healthcare reform",
+             "Put America First and reshaped global trade",
+             "Infrastructure overhaul + steady governance"]
+        ];
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        let
-currentQuestion = 0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        let answers
-= new Array(10).fill(null);</p>
-<p style="line-height: 100%; margin-bottom: 0in">        let scores =
-{A:0, B:0, C:0, D:0, E:0, F:0, G:0, H:0};</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        let currentQuestion = 0;
+        let answers = new Array(10).fill(null);
+        let scores = {A:0, B:0, C:0, D:0, E:0, F:0, G:0, H:0};
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-loadQuestion() {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const q
-= questions[currentQuestion];</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('question-text').textContent =
-`${currentQuestion + 1}. ${q.q}`;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('question-number').textContent = `Question
-${currentQuestion + 1} of 10`;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-optionsDiv = document.getElementById('options');</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-optionsDiv.innerHTML = '';</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-optionsText[currentQuestion].forEach((text, i) =&gt; {</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-const letter = String.fromCharCode(65 + i);</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-const div = document.createElement('div');</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-div.className = 'option';</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-div.textContent = text;</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-div.onclick = () =&gt; selectOption(letter, div);</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-optionsDiv.appendChild(div);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            });</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('next-btn').disabled = true;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-updateProgress();</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-text').textContent = `${currentQuestion + 1}. ${q.q}`;
+            document.getElementById('question-number').textContent = `Question ${currentQuestion + 1} of 10`;
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            optionsText[currentQuestion].forEach((text, i) => {
+                const letter = String.fromCharCode(65 + i);
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = text;
+                div.onclick = () => selectOption(letter, div);
+                optionsDiv.appendChild(div);
+            });
+            
+            document.getElementById('next-btn').disabled = true;
+            updateProgress();
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-selectOption(letter, element) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.querySelectorAll('.option').forEach(opt =&gt;
-opt.classList.remove('selected'));</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-element.classList.add('selected');</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-answers[currentQuestion] = letter;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('next-btn').disabled = false;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function selectOption(letter, element) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            answers[currentQuestion] = letter;
+            document.getElementById('next-btn').disabled = false;
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-updateProgress() {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-percent = ((currentQuestion) / 10) * 100;</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('progress-bar').style.width = percent + '%';</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function updateProgress() {
+            const percent = ((currentQuestion) / 10) * 100;
+            document.getElementById('progress-bar').style.width = percent + '%';
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-document.getElementById('next-btn').addEventListener('click', () =&gt;
-{</p>
-<p style="line-height: 100%; margin-bottom: 0in">            if
-(answers[currentQuestion]) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-currentQuestion++;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                if
-(currentQuestion &lt; 10) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">                   
-loadQuestion();</p>
-<p style="line-height: 100%; margin-bottom: 0in">                }
-else {</p>
-<p style="line-height: 100%; margin-bottom: 0in">                   
-showResults();</p>
-<p style="line-height: 100%; margin-bottom: 0in">                }</p>
-<p style="line-height: 100%; margin-bottom: 0in">            }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        });</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (answers[currentQuestion]) {
+                currentQuestion++;
+                if (currentQuestion < 10) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }
+        });
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-showResults() {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('quiz-screen').style.display = 'none';</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('result-screen').style.display = 'block';</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            //
-Calculate scores</p>
-<p style="line-height: 100%; margin-bottom: 0in">            scores =
-{A:0, B:0, C:0, D:0, E:0, F:0, G:0, H:0};</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-answers.forEach(letter =&gt; {</p>
-<p style="line-height: 100%; margin-bottom: 0in">                if
-(letter) scores[letter]++;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            });</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            // Find
-top matches</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-sorted = Object.entries(scores).sort((a,b) =&gt; b[1] - a[1]);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-topLetter = sorted[0][0];</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-topPres = presidents[topLetter];</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            let html
-= `</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;div
-style=&quot;font-size: 4.5rem; margin: 20px 0;&quot;&gt;🇺🇸&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;div
-class=&quot;president-name&quot;&gt;${topPres.name}&lt;/div&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;p
-class=&quot;score&quot;&gt;You scored ${sorted[0][1]} / 10
-matches&lt;/p&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                &lt;p
-style=&quot;margin: 25px 0; font-size: 1.15rem; max-width: 500px;
-margin-left: auto; margin-right: auto;&quot;&gt;${topPres.desc}&lt;/p&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            `;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            // Show
-top 3</p>
-<p style="line-height: 100%; margin-bottom: 0in">            if
-(sorted.length &gt; 1) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">                html
-+= `&lt;p style=&quot;margin-top:30px;
-color:#64748b;&quot;&gt;Runner-ups:&lt;/p&gt;&lt;ul
-style=&quot;text-align:left; max-width:420px; margin:15px auto;&quot;&gt;`;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                for
-(let i = 1; i &lt; Math.min(3, sorted.length); i++) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">                   
-const lettr = sorted[i][0];</p>
-<p style="line-height: 100%; margin-bottom: 0in">                   
-html += `&lt;li&gt;${presidents[lettr].name} — ${sorted[i][1]}
-points&lt;/li&gt;`;</p>
-<p style="line-height: 100%; margin-bottom: 0in">                }</p>
-<p style="line-height: 100%; margin-bottom: 0in">                html
-+= `&lt;/ul&gt;`;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            }</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('result-content').innerHTML = html;</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function showResults() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+            
+            // Calculate scores
+            scores = {A:0, B:0, C:0, D:0, E:0, F:0, G:0, H:0};
+            answers.forEach(letter => {
+                if (letter) scores[letter]++;
+            });
+            
+            // Find top matches
+            const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+            const topLetter = sorted[0][0];
+            const topPres = presidents[topLetter];
+            
+            let html = `
+                <div style="font-size: 4.5rem; margin: 20px 0;">🇺🇸</div>
+                <div class="president-name">${topPres.name}</div>
+                <p class="score">You scored ${sorted[0][1]} / 10 matches</p>
+                <p style="margin: 25px 0; font-size: 1.15rem; max-width: 500px; margin-left: auto; margin-right: auto;">${topPres.desc}</p>
+            `;
+            
+            // Show top 3
+            if (sorted.length > 1) {
+                html += `<p style="margin-top:30px; color:#64748b;">Runner-ups:</p><ul style="text-align:left; max-width:420px; margin:15px auto;">`;
+                for (let i = 1; i < Math.min(3, sorted.length); i++) {
+                    const lettr = sorted[i][0];
+                    html += `<li>${presidents[lettr].name} — ${sorted[i][1]} points</li>`;
+                }
+                html += `</ul>`;
+            }
+            
+            document.getElementById('result-content').innerHTML = html;
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-restartQuiz() {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-currentQuestion = 0;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            answers
-= new Array(10).fill(null);</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('quiz-screen').style.display = 'block';</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-document.getElementById('result-screen').style.display = 'none';</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-loadQuestion();</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = new Array(10).fill(null);
+            document.getElementById('quiz-screen').style.display = 'block';
+            document.getElementById('result-screen').style.display = 'none';
+            loadQuestion();
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-shareResult(platform) {</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-top = Object.entries(scores).sort((a,b)=&gt;b[1]-a[1])[0][0];</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-name = presidents[top].name;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-text = `I got ${name} on the &quot;Which President of the Last 50
-Years Are You?&quot; quiz! Try it yourself:`;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            const
-url = window.location.href;</p>
-<p style="line-height: 100%; margin-bottom: 0in">            
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">            if
-(platform === 'twitter') {</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&amp;url=${encodeURIComponent(url)}`,
-'_blank');</p>
-<p style="line-height: 100%; margin-bottom: 0in">            } else
-if (platform === 'facebook') {</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-'_blank');</p>
-<p style="line-height: 100%; margin-bottom: 0in">            }</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function shareResult(platform) {
+            const top = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+            const name = presidents[top].name;
+            const text = `I got ${name} on the "Which President of the Last 50 Years Are You?" quiz! Try it yourself:`;
+            const url = window.location.href;
+            
+            if (platform === 'twitter') {
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            } else if (platform === 'facebook') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            }
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        function
-copyLink() {</p>
-<p style="line-height: 100%; margin-bottom: 0in">           
-navigator.clipboard.writeText(window.location.href).then(() =&gt; {</p>
-<p style="line-height: 100%; margin-bottom: 0in">               
-alert(&quot;Link copied to clipboard! Share it with friends.&quot;);</p>
-<p style="line-height: 100%; margin-bottom: 0in">            });</p>
-<p style="line-height: 100%; margin-bottom: 0in">        }</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("Link copied to clipboard! Share it with friends.");
+            });
+        }
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in">        // Start the
-quiz</p>
-<p style="line-height: 100%; margin-bottom: 0in">       
-loadQuestion();</p>
-<p style="line-height: 100%; margin-bottom: 0in">    &lt;/script&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">&lt;/body&gt;</p>
-<p style="line-height: 100%; margin-bottom: 0in">&lt;/html&gt;</p>
+        // Start the quiz
+        loadQuestion();
+    </script>
 </body>
 </html>
